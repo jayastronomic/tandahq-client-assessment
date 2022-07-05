@@ -7,7 +7,11 @@ const AddOrganizationModal = (props) => {
         className="fixed h-full w-full bg-black bg-opacity-60"
         onClick={() => props.setIsOpen(false)}
       ></button>
-      <OrganizationForm />
+      <OrganizationForm
+        authUser={props.authUser}
+        addOrganization={props.addOrganization}
+        setIsOpen={props.setIsOpen}
+      />
     </div>
   );
 };
