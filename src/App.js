@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  resolvePath,
+} from "react-router-dom";
 
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -13,7 +18,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      authUser: { name: "" },
+      authUser: {},
       isLoading: true,
     };
   }
@@ -32,12 +37,27 @@ class App extends Component {
             isLoading: false,
           });
         } else {
+          console.log(resObj);
           this.setState({
             authUser: {},
           });
         }
       })
       .catch((err) => console.log(err));
+  };
+
+  handleLogin = (authUser) => {
+    console.log(authUser);
+    this.setState({
+      authUser,
+      isLoading: false,
+    });
+  };
+
+  handleLogout = () => {
+    this.setState({
+      authUser: {},
+    });
   };
 
   render() {
@@ -48,6 +68,7 @@ class App extends Component {
             path="/"
             element={
               <ProfileWrapper
+                handleLogout={this.handleLogout}
                 authUser={this.state.authUser}
                 isLoading={this.state.isLoading}
               />
@@ -62,10 +83,19 @@ class App extends Component {
                 />
               }
             />
-            <Route path="/:organization" element={<Organization />} />
+            <Route
+              path="/:organization"
+              element={<Organization authUser={this.state.authUser} />}
+            />
           </Route>
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
+          <Route
+            path="/login"
+            element={<Login handleLogin={this.handleLogin} />}
+          />
+          <Route
+            path="/signup"
+            element={<Signup handleLogin={this.handleLogin} />}
+          />
         </Routes>
       </Router>
     );

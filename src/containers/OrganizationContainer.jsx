@@ -37,6 +37,7 @@ const OrganizationContainer = (props) => {
                 setIsEditOrganizationModalOpen={
                   props.setIsEditOrganizationModalOpen
                 }
+                authUser={props.authUser}
                 {...organization}
                 key={i}
               />

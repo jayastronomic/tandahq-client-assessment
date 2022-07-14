@@ -13,6 +13,7 @@ const Organizations = (props) => {
         organizations={props.organizations}
         isLoading={props.isLoading}
         setSelectedOrganization={props.setSelectedOrganization}
+        authUser={props.authUser}
       />
     </div>
   );

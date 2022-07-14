@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import Organizations from "../components/Organizations";
 
-const API = "http://localhost:3001/organizations";
-const Home = () => {
+const Home = (props) => {
   const context = useOutletContext();
 
   return (
@@ -13,6 +12,7 @@ const Home = () => {
         organizations={context.organizations}
         isLoading={context.isLoading}
         setSelectedOrganization={context.setSelectedOrganization}
+        authUser={props.authUser}
       />
     </div>
   );

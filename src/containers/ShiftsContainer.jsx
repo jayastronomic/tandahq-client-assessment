@@ -24,9 +24,9 @@ const ShiftContainer = (props) => {
           <div className="bg-blue-500 w-full rounded-t">Date</div>
           <div className="bg-blue-500 w-full rounded-t">Start</div>
           <div className="bg-blue-500 w-full rounded-t">Finish</div>
-          <div className="bg-blue-500 w-full rounded-t">Break</div>
+          <div className="bg-blue-500 w-full rounded-t">Break(mins)</div>
           <div className="bg-blue-500 w-full rounded-t">Hours</div>
-          <div className="bg-blue-500 w-full rounded-t">Earned</div>
+          <div className="bg-blue-500 w-full rounded-t">Earnings</div>
         </div>
         {props.shifts.map((shift, i) => {
           return <ShiftCard {...shift} key={i} />;

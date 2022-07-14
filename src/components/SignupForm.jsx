@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const API = "http://localhost:3001/users";
 
-const SignupForm = () => {
+const SignupForm = (props) => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
@@ -17,18 +17,11 @@ const SignupForm = () => {
     setPasswordConfirmation("");
   };
   const handleChange = (e) => {
-    if (e.target.name === "name") {
-      setName(e.target.value);
-    }
-    if (e.target.name === "emailAddress") {
-      setEmailAddress(e.target.value);
-    }
-    if (e.target.name === "password") {
-      setPassword(e.target.value);
-    }
-    if (e.target.name === "passwordConfirmation") {
+    if (e.target.name === "name") setName(e.target.value);
+    if (e.target.name === "emailAddress") setEmailAddress(e.target.value);
+    if (e.target.name === "password") setPassword(e.target.value);
+    if (e.target.name === "passwordConfirmation")
       setPasswordConfirmation(e.target.value);
-    }
   };
 
   const handleSubmit = (e) => {
@@ -53,7 +46,7 @@ const SignupForm = () => {
 
     fetch(API, payload)
       .then((resp) => resp.json())
-      .then((resObj) => console.log(resObj))
+      .then((resObj) => props.handleLogin(resObj))
       .catch((err) => console.log(err));
 
     clearForm();

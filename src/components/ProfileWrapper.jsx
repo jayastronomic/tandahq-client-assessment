@@ -11,6 +11,7 @@ const ProfileWrapper = (props) => {
     fetch(API, { credentials: "include" })
       .then((resp) => resp.json())
       .then((resObj) => {
+        console.log(resObj);
         setOrganizations(resObj);
         setIsLoading(false);
       })
@@ -24,7 +25,6 @@ const ProfileWrapper = (props) => {
   const [selectedOrganization, setSelectedOrganization] = useState({});
 
   const addOrganization = (newOrganization) => {
-    console.log(newOrganization);
     setOrganizations([newOrganization, ...organizations]);
   };
   const addUpdatedOrganization = (updatedOrganization) => {

@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import Spinner from "./Spinner";
+
+const API = "http://localhost:3001/logout";
 const ProfileInformation = (props) => {
+  const navigate = useNavigate();
+
+  console.log(props);
+  const logout = () => {
+    fetch(API, { method: "DELETE", credentials: "include" })
+      .then((resp) => resp.json())
+      .then((resObj) => {
+        console.log(resObj);
+        props.handleLogout();
+      })
+      .catch((err) => console.log(err));
+
+    navigate("/login");
+  };
   return (
     <div className="flex space-x-4 md:flex-col md:space-x-0">
       <div className="flex flex-col border shadow-md min-w-[15rem] p-4 items-center bg-white rounded">
@@ -20,6 +37,12 @@ const ProfileInformation = (props) => {
                 {props.name}
               </p>
               <p className="text-sm text-gray-600">{props.email_address}</p>
+              <button
+                onClick={() => logout()}
+                className="bg-gray-500 text-white font-medium hover:bg-gray-600 transition text-xs py-0.5 px-4 rounded"
+              >
+                Log off
+              </button>
             </div>
           </>
         )}
