@@ -31,23 +31,20 @@ class App extends Component {
     fetch(API, { credentials: "include" })
       .then((resp) => resp.json())
       .then((resObj) => {
+        console.log(resObj);
         if (resObj.logged_in === true) {
           this.setState({
             authUser: resObj,
             isLoading: false,
           });
         } else {
-          console.log(resObj);
-          this.setState({
-            authUser: {},
-          });
+          this.handleLogout();
         }
       })
       .catch((err) => console.log(err));
   };
 
   handleLogin = (authUser) => {
-    console.log(authUser);
     this.setState({
       authUser,
       isLoading: false,

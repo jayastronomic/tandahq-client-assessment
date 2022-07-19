@@ -10,7 +10,6 @@ const API = "http://localhost:3001/organizations";
 const API2 = "http://localhost:3001/join_organization";
 
 const Organization = (props) => {
-  console.log(props);
   const location = useLocation();
   const [organization, setOrganization] = useState({});
   const [shifts, setShifts] = useState([]);
@@ -23,7 +22,7 @@ const Organization = (props) => {
       .then((resp) => resp.json())
       .then((resObj) => {
         setOrganization(resObj);
-        setShifts(resObj.shifts);
+        setShifts(resObj.shifts.reverse());
         setAuthUserJoined(resObj.auth_user_joined);
       })
       .catch((err) => console.log(err));
@@ -73,7 +72,7 @@ const Organization = (props) => {
           icon={solid("arrow-left")}
           size="2x"
         />
-        <h1 className="text-2xl font-medium text-gray-700 py-2">
+        <h1 className="text-2xl font-bold text-gray-700 ml-32">
           {organization.name}
         </h1>
         {authUserJoined ? (
